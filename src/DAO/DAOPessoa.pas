@@ -47,6 +47,7 @@ function TDAOPessoa.inserirCSV(nomeArquivo: String): String;
 var
   Query: TDataSet;
 begin
+  //tentei usar esta função do postgresql e estava dando erro, então por falta de prazo fiz de outra forma
   Query := executarConsulta(
   'COPY pessoa(flnatureza, dsdocumento, nmprimeiro, nmsegundo,dtregistro)'+
   'FROM '+QuotedStr(nomeArquivo)+

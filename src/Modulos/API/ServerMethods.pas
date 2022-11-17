@@ -221,10 +221,16 @@ begin
       Result := TFunc.DataSetToJson(Query);
       Query.Free;
     end;
-  if metodo = 'teste' then
-    begin
-      CTRPessoa.inserirCSV('C:\teste\template.csv');
-    end;
+    (*
+    o método comentado abaixo era um teste direto no postgresql
+    usando a função copy para importar o CSV,
+    mas como estava dando erro, para não estourar
+    o prazo fiz pelo sistema mesmo
+    *)
+//  if metodo = 'teste' then
+//    begin
+//      CTRPessoa.inserirCSV('C:\teste\template.csv');
+//    end;
 
   CTRPessoa.Free;
 end;
@@ -334,6 +340,11 @@ var
   CTRPessoaEndereco: TCTRPessoaEndereco;
   r: TRetornoApi;
 begin
+  (* para evitar várias chamadas de api
+  o arquivo csv é serializado e enviado todo,
+  aqui no servidor ele é deserializado e percorrido para gravação dos dados
+
+  *)
   CTRPessoaEndereco:= TCTRPessoaEndereco.Create;
   r:= CTRPessoaEndereco.inserirCSV(arr);
 

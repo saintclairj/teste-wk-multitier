@@ -1,0 +1,58 @@
+unit SuperDAO;
+
+interface
+uses Firedac.Comp.Client, Data.DB;
+
+  type
+
+  TSuperDAO = class
+    public
+      function executarSQL(SQL: String): String;
+      function executarConsulta(SQL: String): TDataSet;
+
+  end;
+
+implementation
+uses Principal;
+
+{ TSuperDAO }
+
+function TSuperDAO.executarConsulta(SQL: String): TDataSet;
+var
+  Query: TFDQuery;
+begin
+
+  Query:= TFDQuery.Create(frmPrincipal);
+  Query.Connection := frmPrincipal.Conexao;
+  Query.SQL.Text:= SQL;
+  try
+    Query.OpenOrExecute;
+  except
+    Query.SQL.SaveToFile('ultimo erro.txt');
+
+  end;
+
+  Result:= Query;
+
+
+end;
+
+function TSuperDAO.executarSQL(SQL: String): String;
+var
+  Query: TFDQuery;
+begin
+  Result := '';
+  Query:= TFDQuery.Create(frmPrincipal);
+  Query.Connection := frmPrincipal.Conexao;
+  Query.SQL.Text:= SQL;
+  try
+    Query.ExecSQL;
+  except
+    Query.SQL.SaveToFile('ultimo erro.txt');
+    Result:= 'erro ao executar SQL';
+  end;
+
+  Query.Free;
+end;
+
+end.

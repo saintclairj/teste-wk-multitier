@@ -12,7 +12,9 @@ uses
   PessoaEndereco in '..\..\Entidades\PessoaEndereco.pas',
   CTRPessoaEndereco in 'CTR\CTRPessoaEndereco.pas',
   CTREndereco in 'CTR\CTREndereco.pas',
-  CTREndereco_Integracao in 'CTR\CTREndereco_Integracao.pas';
+  CTREndereco_Integracao in 'CTR\CTREndereco_Integracao.pas',
+  CEP in '..\..\Entidades\CEP.pas',
+  CTRCep in '..\..\CTR\CTRCep.pas';
 
 {$R *.res}
 

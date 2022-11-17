@@ -11,7 +11,7 @@ uses
   Vcl.ExtCtrls, Vcl.Buttons, CTRPessoa, Pessoa, PessoaEndereco, CTRPessoaEndereco,
   CTREndereco, CTREndereco_Integracao,
   Vcl.StdCtrls, Vcl.Mask, IPPeerClient, REST.Client, Data.Bind.Components,
-  Data.Bind.ObjectScope;
+  Data.Bind.ObjectScope, CEP, CTRCep;
 
 type
   TfrmPrincipal = class(TForm)
@@ -72,6 +72,7 @@ type
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure btImportarClick(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
+    procedure editCEPExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -82,6 +83,8 @@ type
     PessoaEndereco: TPessoaEndereco;
     CTREndereco: TCTREndereco;
     CTREndereco_Integracao: TCTREndereco_Integracao;
+    CEP: TCEP;
+    CTRCEP: TCTRCEP;
 
 
     procedure pesquisar;
@@ -89,6 +92,7 @@ type
     procedure excluir;
     procedure limparCampos;
     procedure salvar;
+    procedure carregarCEP;
   end;
 
 var
@@ -126,6 +130,23 @@ begin
   limparCampos;
   PC.ActivePage:= TabCadastro;
   editNome.SetFocus;
+end;
+
+procedure TfrmPrincipal.carregarCEP;
+begin
+  CEP:= TCEP.Create;
+  CEP:= CTRCep.pegarEndereco(editCEP.Text);
+  if cep.cep <> '' then
+    begin
+      editEndereco.Text:= CEP.logradouro;
+      editUF.Text := CEP.uf;
+      editCidade.Text := CEP.localidade;
+      editBairro.Text := CEP.bairro;
+    end
+  else
+    begin
+      ShowMessage('CEP não encontrado!');
+    end;
 end;
 
 procedure TfrmPrincipal.DBGrid1DblClick(Sender: TObject);
@@ -169,6 +190,14 @@ begin
     end;
 end;
 
+procedure TfrmPrincipal.editCEPExit(Sender: TObject);
+begin
+  if Length(editCEP.Text) = 8 then
+    begin
+      carregarCEP;
+    end;
+end;
+
 procedure TfrmPrincipal.excluir;
 var
   r: TRetornoApi;
@@ -193,6 +222,8 @@ begin
   PessoaEndereco:= TPessoaEndereco.Create;
   CTREndereco:= TCTREndereco.Create;
   CTREndereco_Integracao:= TCTREndereco_Integracao.Create;
+  CEP:= TCEP.Create;
+  CTRCEP:= TCTRCEP.Create;
 
   PC.ActivePageIndex:= 0;
 end;

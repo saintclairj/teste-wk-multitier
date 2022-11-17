@@ -22,7 +22,7 @@ object frmPrincipal: TfrmPrincipal
     Top = 0
     Width = 703
     Height = 477
-    ActivePage = TabLista
+    ActivePage = TabCadastro
     Align = alClient
     Style = tsButtons
     TabOrder = 0
@@ -697,7 +697,9 @@ object frmPrincipal: TfrmPrincipal
         Top = 91
         Width = 90
         Height = 21
+        MaxLength = 8
         TabOrder = 6
+        OnExit = editCEPExit
       end
       object editUF: TEdit
         Left = 8

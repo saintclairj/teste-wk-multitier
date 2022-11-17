@@ -1,0 +1,35 @@
+program API;
+{$APPTYPE GUI}
+
+{$R *.dres}
+
+uses
+  Vcl.Forms,
+  Web.WebReq,
+  IdHTTPWebBrokerBridge,
+  Principal in 'Principal.pas' {frmPrincipal},
+  ServerMethods in 'ServerMethods.pas' {SM: TDataModule},
+  UDM in 'UDM.pas' {DM: TWebModule},
+  Pessoa in '..\..\Entidades\Pessoa.pas',
+  DAOPessoa in '..\..\DAO\DAOPessoa.pas',
+  CTRPessoa in '..\..\CTR\CTRPessoa.pas',
+  SuperDAO in '..\..\DAO\SuperDAO.pas',
+  Endereco in '..\..\Entidades\Endereco.pas',
+  Endereco_integracao in '..\..\Entidades\Endereco_integracao.pas',
+  DAOEndereco_integracao in '..\..\DAO\DAOEndereco_integracao.pas',
+  CTREndereco_integracao in '..\..\CTR\CTREndereco_integracao.pas',
+  DAOEndereco in '..\..\DAO\DAOEndereco.pas',
+  CTREndereco in '..\..\CTR\CTREndereco.pas',
+  Func in '..\..\Func.pas',
+  PessoaEndereco in '..\..\Entidades\PessoaEndereco.pas',
+  CTRPessoaEndereco in '..\..\CTR\CTRPessoaEndereco.pas';
+
+{$R *.res}
+
+begin
+  if WebRequestHandler <> nil then
+    WebRequestHandler.WebModuleClass := WebModuleClass;
+  Application.Initialize;
+  Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.Run;
+end.

@@ -2,22 +2,21 @@ unit CTRPessoaEndereco;
 
 interface
 
-uses PessoaEndereco, Func, CTREndereco, CTREndereco_Integracao,
-CTRPessoa;
+uses PessoaEndereco, Func, DAOPessoaEndereco, System.JSON;
 
 type
 
   TCTRPessoaEndereco = class
   public
-    CTREndereco: TCTREndereco;
-    CTREndereco_Integracao : TCTREndereco_Integracao;
-    CTRPessoa: TCTRPessoa;
+    DAO: TDAOPessoaEndereco;
+
     constructor Create;
 
     function inserir(PessoaEndereco : TPessoaEndereco) : TRetornoApi;
     function atualizar(PessoaEndereco : TPessoaEndereco) : TRetornoApi;
     function salvar(PessoaEndereco : TPessoaEndereco) : TRetornoApi;
     function validar(PessoaEndereco : TPessoaEndereco): TRetornoApi;
+    function inserirCSV(arr: TJSONArray): TRetornoApi;
 
   end;
 
@@ -30,17 +29,14 @@ begin
   Result := validar(PessoaEndereco);
   if Result.status = 'ok' then
     begin
-      CTRPessoa.atualizar(PessoaEndereco.pessoa);
-      CTREndereco.atualizar(PessoaEndereco.endereco);
-      CTREndereco_Integracao.atualizar(PessoaEndereco.endereco_integracao);
+      Result := DAO.atualizar(PessoaEndereco);
     end;
 end;
 
 constructor TCTRPessoaEndereco.Create;
 begin
-  CTRPessoa:= TCTRPessoa.Create;
-  CTREndereco:= TCTREndereco.Create;
-  CTREndereco_Integracao := TCTREndereco_Integracao.Create;
+
+  DAO:= TDAOPessoaEndereco.Create;
 end;
 
 function TCTRPessoaEndereco.inserir(PessoaEndereco: TPessoaEndereco): TRetornoApi;
@@ -48,12 +44,13 @@ begin
   Result := validar(PessoaEndereco);
   if Result.status = 'ok' then
     begin
-      CTRPessoa.inserir(PessoaEndereco.pessoa);
-      PessoaEndereco.endereco.idpessoa := PessoaEndereco.pessoa.idpessoa;
-      CTREndereco.inserir(PessoaEndereco.endereco);
-      PessoaEndereco.endereco_integracao.idendereco := PessoaEndereco.endereco.idendereco;
-      CTREndereco_Integracao.inserir(PessoaEndereco.endereco_integracao);
+      Result := DAO.inserir(PessoaEndereco);
     end;
+end;
+
+function TCTRPessoaEndereco.inserirCSV(arr: TJSONArray): TRetornoApi;
+begin
+  Result := DAO.inserirCSV(arr);
 end;
 
 function TCTRPessoaEndereco.salvar(

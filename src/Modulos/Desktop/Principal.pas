@@ -51,6 +51,9 @@ type
     editEndereco: TEdit;
     Label11: TLabel;
     editComplemento: TEdit;
+    od: TOpenDialog;
+    Label12: TLabel;
+    cbTipoPessoa: TComboBox;
     procedure SpeedButton1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
@@ -61,6 +64,7 @@ type
       Shift: TShiftState);
     procedure BtNovoClick(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure btImportarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -71,6 +75,7 @@ type
     PessoaEndereco: TPessoaEndereco;
     CTREndereco: TCTREndereco;
     CTREndereco_Integracao: TCTREndereco_Integracao;
+
 
     procedure pesquisar;
     procedure editar;
@@ -95,6 +100,17 @@ end;
 procedure TfrmPrincipal.BtExcluirClick(Sender: TObject);
 begin
   excluir;
+end;
+
+procedure TfrmPrincipal.btImportarClick(Sender: TObject);
+var
+  r: TRetornoApi;
+begin
+  if od.Execute then
+    begin
+      r:= CTRPessoa.enviarArquivo(od.FileName);
+      Tfunc.interpretarRetorno(r);
+    end;
 end;
 
 procedure TfrmPrincipal.BtNovoClick(Sender: TObject);
@@ -128,6 +144,7 @@ begin
       CTREndereco_Integracao.preencherEntidade(mtLista, PessoaEndereco.endereco_integracao);
 
       editId.Text:= PessoaEndereco.Pessoa.idpessoa;
+      cbTipoPessoa.ItemIndex:= StrToInt(PessoaEndereco.Pessoa.flnatureza);
       editNome.Text:= PessoaEndereco.Pessoa.nmprimeiro;
       editSobrenome.Text := PessoaEndereco.Pessoa.nmsegundo;
       editDocumento.Text := PessoaEndereco.Pessoa.dsdocumento;
@@ -186,6 +203,7 @@ end;
 procedure TfrmPrincipal.limparCampos;
 begin
   editId.Text:= '';
+  cbTipoPessoa.ItemIndex:= 1;
   editNome.Text:= '';
   editSobrenome.Text := '';
   editDocumento.Text := '';
@@ -216,7 +234,7 @@ begin
   if TryStrToDate(editDataRegistro.Text, d) then
     begin
       PessoaEndereco.Pessoa.idpessoa:= editId.Text;
-      PessoaEndereco.Pessoa.flnatureza := '0';
+      PessoaEndereco.Pessoa.flnatureza := intToStr(cbTipoPessoa.ItemIndex);
       PessoaEndereco.Pessoa.nmprimeiro:= editNome.Text;
       PessoaEndereco.Pessoa.nmsegundo := editSobrenome.Text;
       PessoaEndereco.Pessoa.dsdocumento := editDocumento.Text;

@@ -22,7 +22,8 @@ uses
   CTREndereco in '..\..\CTR\CTREndereco.pas',
   Func in '..\..\Func.pas',
   PessoaEndereco in '..\..\Entidades\PessoaEndereco.pas',
-  CTRPessoaEndereco in '..\..\CTR\CTRPessoaEndereco.pas';
+  CTRPessoaEndereco in '..\..\CTR\CTRPessoaEndereco.pas',
+  DAOPessoaEndereco in '..\..\DAO\DAOPessoaEndereco.pas';
 
 {$R *.res}
 

@@ -6,7 +6,8 @@ uses FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error,
   FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
   FireDAC.DApt, Data.DB,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, pessoa, Func, SuperDAO;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, pessoa, Func, SuperDAO,
+  System.SysUtils;
 
 Type
 
@@ -18,6 +19,7 @@ Type
     function preencherEntidade(pessoa: TPessoa): Boolean;
     procedure preencherDTO(Query: TDataSet; pessoa: TPessoa);
     function listar: TDataSet;
+    function inserirCSV(nomeArquivo: String): String;
 
   end;
 
@@ -38,6 +40,18 @@ begin
     pessoa.idpessoa := Query.FieldByName('idpessoa').AsString;
   Result := not Query.IsEmpty;
   Query.Free;
+
+end;
+
+function TDAOPessoa.inserirCSV(nomeArquivo: String): String;
+var
+  Query: TDataSet;
+begin
+  Query := executarConsulta(
+  'COPY pessoa(flnatureza, dsdocumento, nmprimeiro, nmsegundo,dtregistro)'+
+  'FROM '+QuotedStr(nomeArquivo)+
+  ' DELIMITER '','' CSV HEADER;');
+
 
 end;
 

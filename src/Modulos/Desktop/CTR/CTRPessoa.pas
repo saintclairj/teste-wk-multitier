@@ -1,7 +1,7 @@
 unit CTRPessoa;
 
 interface
-uses UDM, Func, Data.DB, Pessoa, Rest.JSON;
+uses UDM, Func, Data.DB, Pessoa, Rest.JSON, System.JSON;
   type
   TCTRPessoa = class
     procedure listar(ds: TDataSet);
@@ -10,6 +10,7 @@ uses UDM, Func, Data.DB, Pessoa, Rest.JSON;
     function atualizar(Pessoa: TPessoa): TRetornoApi;
     function salvar(Pessoa: TPessoa): TRetornoApi;
     function excluir(id: String):TRetornoApi;
+    function enviarArquivo(nomeArquivo: String): TRetornoApi;
 
   end;
 
@@ -25,6 +26,18 @@ begin
   s:= DM.chamarMetodoPut('Pessoa',s);
   Result:= Tfunc.pegarRetornoApi(s);
 
+
+end;
+
+function TCTRPessoa.enviarArquivo(nomeArquivo: String): TRetornoApi;
+var
+  jArr: TJSONArray;
+  s: String;
+begin
+  jArr:= TFunc.ArquivoParaJSON(nomeArquivo);
+  s:= DM.chamarMetodoPost('PessoaImportar',jArr.ToString);
+  Result:= Tfunc.pegarRetornoApi(s);
+  jArr.Free;
 
 end;
 

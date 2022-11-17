@@ -8,8 +8,8 @@
     <Transaction>2022/11/14 18:00:14.000.666,=D:\teste-wk-multitier\src\Modulos\API\js\serverfunctioninvoker.js</Transaction>
     <Transaction>2022/11/14 18:00:14.000.871,=D:\teste-wk-multitier\src\Modulos\API\images\collapse.png</Transaction>
     <Transaction>2022/11/14 18:00:14.000.775,=D:\teste-wk-multitier\src\Modulos\API\templates\serverfunctioninvoker.html</Transaction>
-    <Transaction>2022/11/14 18:00:14.000.690,=D:\teste-wk-multitier\src\Modulos\API\css\main.css</Transaction>
     <Transaction>2022/11/14 18:00:14.000.527,=D:\teste-wk-multitier\src\Modulos\API\js\serverfunctions.js</Transaction>
+    <Transaction>2022/11/14 18:00:14.000.690,=D:\teste-wk-multitier\src\Modulos\API\css\main.css</Transaction>
     <Transaction>2022/11/14 18:00:14.000.713,=D:\teste-wk-multitier\src\Modulos\API\css\serverfunctioninvoker.css</Transaction>
     <Transaction>2022/11/14 18:00:14.000.507,=D:\teste-wk-multitier\src\Modulos\API\js\callbackframework.js</Transaction>
     <Transaction>2022/11/14 18:00:14.000.594,=D:\teste-wk-multitier\src\Modulos\API\js\serverfunctionexecutor-min.js</Transaction>
@@ -44,5 +44,7 @@
     <Transaction>2022/11/16 19:24:39.305,D:\teste-wk-multitier\src\Entidades\PessoaEndereco.pas=D:\teste-wk-multitier\src\Modulos\API\Unit1.pas</Transaction>
     <Transaction>2022/11/16 19:36:28.289,=D:\teste-wk-multitier\src\Modulos\API\Unit1.pas</Transaction>
     <Transaction>2022/11/16 19:37:14.820,D:\teste-wk-multitier\src\CTR\CTRPessoaEndereco.pas=D:\teste-wk-multitier\src\Modulos\API\Unit1.pas</Transaction>
+    <Transaction>2022/11/17 11:21:05.237,=D:\teste-wk-multitier\src\Modulos\API\Unit1.pas</Transaction>
+    <Transaction>2022/11/17 11:21:35.753,D:\teste-wk-multitier\src\DAO\DAOPessoaEndereco.pas=D:\teste-wk-multitier\src\Modulos\API\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

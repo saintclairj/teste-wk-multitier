@@ -4,7 +4,7 @@ interface
 
 uses System.SysUtils, System.Classes, System.Json,
     Datasnap.DSServer, Datasnap.DSAuth, Rest.JSON,
-    Data.DB;
+    Data.DB, Forms;
 
 type
 {$METHODINFO ON}
@@ -31,6 +31,7 @@ type
     function cancelPessoa(id: String):TJSONValue;
 
     function updatePessoaEndereco(arr : TJSONArray):TJSONValue;
+    function updatePessoaImportar(arr : TJSONArray):TJSONValue;
     function acceptPessoaEndereco(arr : TJSONArray):TJSONValue;
 
     function updateEndereco(objJ : TJSONObject):TJSONValue;
@@ -206,6 +207,10 @@ begin
       Result := TFunc.DataSetToJson(Query);
       Query.Free;
     end;
+  if metodo = 'teste' then
+    begin
+      CTRPessoa.inserirCSV('C:\teste\template.csv');
+    end;
 
   CTRPessoa.Free;
 end;
@@ -280,6 +285,8 @@ begin
   Pessoa.Free;
 end;
 
+
+
 function TSM.updatePessoaEndereco(arr : TJSONArray): TJSONValue;
 var
   CTRPessoaEndereco: TCTRPessoaEndereco;
@@ -304,6 +311,19 @@ begin
   PessoaEndereco.Free;
 
 
+end;
+
+
+
+function TSM.updatePessoaImportar(arr: TJSONArray): TJSONValue;
+var
+  CTRPessoaEndereco: TCTRPessoaEndereco;
+  r: TRetornoApi;
+begin
+  CTRPessoaEndereco:= TCTRPessoaEndereco.Create;
+  r:= CTRPessoaEndereco.inserirCSV(arr);
+
+  Result := TFunc.pegarMensagemAPI(r);
 end;
 
 end.

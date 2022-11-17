@@ -20,6 +20,7 @@ interface
     function preencherEntidade(Pessoa : TPessoa) : Boolean;
     procedure preencherDTO(Query: TDataSet; Pessoa : TPessoa);
     function listar: TDataSet;
+    function inserirCSV(nomeArquivo: String): String;
   end;
 
 
@@ -39,6 +40,11 @@ end;
 function TCTRPessoa.inserir(Pessoa : TPessoa) : Boolean;
 begin
   Result := objDAOPessoa.inserir(Pessoa);
+end;
+
+function TCTRPessoa.inserirCSV(nomeArquivo: String): String;
+begin
+  Result:= objDAOPessoa.inserirCSV(nomeArquivo);
 end;
 
 function TCTRPessoa.listar: TDataSet;

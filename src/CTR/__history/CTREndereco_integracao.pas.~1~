@@ -1,0 +1,74 @@
+Unit BLLendereco_integracao;
+
+interface
+
+  uses FireDAC.Stan.Intf, FireDAC.Stan.Option,FireDAC.Stan.Param, FireDAC.Stan.Error,FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,FireDAC.Comp.DataSet, FireDAC.Comp.Client, DTOendereco_integracao, Func;
+
+  Type
+
+  TBLLendereco_integracao = Class
+  private
+    constructor Create; overload;
+  public
+    objDalendereco_integracao : TDALendereco_integracao;
+    destructor Destroy; override;
+
+    function inserir(dtoendereco_integracao : TDTOendereco_integracao) : Boolean;
+    function atualizar(dtoendereco_integracao : TDTOendereco_integracao) : Boolean;
+    function salvar(dtoendereco_integracao : TDTOendereco_integracao) : Boolean;
+    function excluir(dtoendereco_integracao : TDTOendereco_integracao) : Boolean;
+    function preencherEntidade(dtoendereco_integracao : TDTOendereco_integracao) : Boolean;
+    procedure preencherDTO(Query: TADOQuery; dtoendereco_integracao : TDTOendereco_integracao);
+  end;
+
+
+implementation
+
+constructor TBLLendereco_integracao.Create;
+begin
+  objDALendereco_integracao := TDALendereco_integracao.Create;
+end;
+
+destructor TBLLendereco_integracao.Destroy;
+begin
+  FreeAndNil(objDALendereco_integracao);
+  inherited;
+end;
+
+function TBLLendereco_integracao.inserir(dtoendereco_integracao : TDTOendereco_integracao) : Boolean;
+begin
+  Result := objDALendereco_integracao.inserir(dtoendereco_integracao);
+end;
+
+function TBLLendereco_integracao.atualizar(dtoendereco_integracao : TDTOendereco_integracao) : Boolean;
+begin
+  Result := objDALendereco_integracao.atualizar(dtoendereco_integracao);
+end;
+
+function TBLLendereco_integracao.salvar(dtoendereco_integracao : TDTOendereco_integracao) : Boolean;
+begin
+  if dtoendereco_integracao.idendereco = '' then
+    begin
+      Result := objDALendereco_integracao.inserir(dtoendereco_integracao);
+    end
+  else
+    begin
+      Result := objDALendereco_integracao.atualizar(dtoendereco_integracao);
+    end;
+end;
+
+function TBLLendereco_integracao.excluir(dtoendereco_integracao : TDTOendereco_integracao) : Boolean;
+begin
+  Result := objDALendereco_integracao.excluir(dtoendereco_integracao);
+end;
+
+function TBLLendereco_integracao.preencherEntidade(dtoendereco_integracao : TDTOendereco_integracao) : Boolean;
+begin
+  Result := objDALendereco_integracao.preencherEntidade(dtoendereco_integracao);
+end;
+
+procedure TBLLendereco_integracao.preencherDTO(Query:TADOQuery; dtoendereco_integracao : TDTOendereco_integracao);
+begin
+  objDALendereco_integracao.preencherDTO(Query, dtoendereco_integracao);
+end;
+end.

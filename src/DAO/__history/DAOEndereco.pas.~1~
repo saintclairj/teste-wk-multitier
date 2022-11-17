@@ -1,0 +1,149 @@
+Unit DALendereco;
+
+interface
+
+  uses FireDAC.Stan.Intf, FireDAC.Stan.Option,FireDAC.Stan.Param, FireDAC.Stan.Error,FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,FireDAC.Comp.DataSet, FireDAC.Comp.Client, DTOendereco, Func;
+
+  Type
+
+  TDALendereco = Class
+  public
+    function inserir(dtoendereco : TDTOendereco) : Boolean;
+    function atualizar(dtoendereco : TDTOendereco) : Boolean;
+    function excluir(dtoendereco : TDTOendereco) : Boolean;
+    function preencherEntidade(dtoendereco : TDTOendereco) : Boolean;
+    procedure preencherDTO(Query: TADOQuery; dtoendereco : TDTOendereco);
+  end;
+
+
+implementation
+
+function TDALendereco.inserir(dtoendereco : TDTOendereco) : Boolean;
+begin
+  try
+    Result := True;
+    with DM.QAux do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('INSERT INTO endereco(');
+      SQL.Add('idpessoa,dscep)');
+      SQL.Add('VALUES ('); 
+      SQL.Add(VazioNullString(dtoendereco.idpessoa)+','+QuotedStr2(dtoendereco.dscep)+')');
+      ExecSQL;
+    end;
+  except
+    On erro:Exception do 
+    begin
+      MessageDlg('Ocorreu um erro ao inserir endereco! '
+      + 'Mensagem de erro : ' + #13 + erro.message, mtInformation, [MbOk], 0);
+      Result := false;
+      DM.QAux.SQL.SaveToFile('C:\sihl\sql.txt');
+    end;
+  end;
+end;
+
+
+function TDALendereco.atualizar(dtoendereco : TDTOendereco) : Boolean;
+begin
+  try
+    Result := True;
+    with DM.QAux do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('UPDATE endereco SET');
+      SQL.Add('idendereco = ' + VazioNullString(dtoendereco.idendereco)+',');
+      SQL.Add('dscep = ' + QuotedStr2(dtoendereco.dscep));
+
+      SQL.Add('WHERE idendereco = ' + dtoendereco.idendereco); 
+      ExecSQL;
+    end;
+  except
+    On erro:Exception do 
+    begin
+      MessageDlg('Ocorreu um erro ao atualizar endereco! '
+      + 'Mensagem de erro : ' + #13 + erro.message, mtInformation, [MbOk], 0);
+      Result := false;
+      DM.QAux.SQL.SaveToFile('C:\sihl\sql.txt');
+    end;
+  end;
+end;
+
+
+function TDALendereco.excluir(dtoendereco : TDTOendereco) : Boolean;
+begin
+  try
+    Result := True;
+    with DM.QAux do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('DELETE FROM endereco');
+      SQL.Add('WHERE idendereco = :pidendereco'); 
+      ParamByName('pidendereco').Value := dtoendereco.idendereco;
+      ExecSQL;
+    end;
+  except
+    On erro:Exception do 
+    begin
+      MessageDlg('Ocorreu um erro ao deletar endereco! '
+      + 'Mensagem de erro : ' + #13 + erro.message, mtInformation, [MbOk], 0);
+      Result := false;
+      DM.QAux.SQL.SaveToFile('C:\sihl\sql.txt');
+    end;
+  end;
+end;
+
+
+function TDALendereco.preencherEntidade(dtoendereco : TDTOendereco) : Boolean;
+begin
+  try
+    Result := True;
+    with DM.QAux do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('SELECT ');
+      SQL.Add('idendereco,idpessoa,dscep');
+      SQL.Add('FROM endereco'); 
+      SQL.Add('WHERE idendereco = :pidendereco'); 
+      ParamByName('pidendereco').Value := dtoendereco.idendereco;
+      Open;
+      dtoendereco.idendereco := FieldByName('idendereco').AsString;
+      dtoendereco.idpessoa := FieldByName('idpessoa').AsString;
+      dtoendereco.dscep := FieldByName('dscep').AsString;
+      Close;
+
+    end;
+  except
+    On erro:Exception do 
+    begin
+      MessageDlg('Ocorreu um erro ao preencher a entidade endereco! '
+      + 'Mensagem de erro : ' + #13 + erro.message, mtInformation, [MbOk], 0);
+      Result := false;
+      DM.QAux.SQL.SaveToFile('C:\sihl\sql.txt');
+    end;
+  end;
+end;
+
+
+procedure TDALendereco.preencherDTO(Query:TADOQuery; dtoendereco : TDTOendereco);
+begin
+  try
+    with Query do
+    begin
+      dtoendereco.idendereco := FieldByName('idendereco').AsString;
+      dtoendereco.idpessoa := FieldByName('idpessoa').AsString;
+      dtoendereco.dscep := FieldByName('dscep').AsString;
+
+    end;
+  except
+    On erro:Exception do 
+    begin
+      MessageDlg('Ocorreu um erro ao preencher DTOendereco! '
+      + 'Mensagem de erro : ' + #13 + erro.message, mtInformation, [MbOk], 0);
+    end;
+  end;
+end;
+end.

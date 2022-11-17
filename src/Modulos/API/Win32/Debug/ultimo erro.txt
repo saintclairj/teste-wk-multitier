@@ -1,0 +1,1 @@
+begin DELETE FROM endereco_integracao WHERE idendereco = (SELECT idendereco FROM endereco WHERE idpessoa = 1); DELETE FROM endereco  WHERE idpessoa = 1; DELETE FROM pessoa  WHERE pessoa.idpessoa = 1; end

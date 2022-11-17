@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2022/11/14 18:00:08.000.793,=D:\teste-wk-multitier\src\Modulos\API\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2022/11/14 18:00:08.000.477,=D:\teste-wk-multitier\src\Modulos\API\FormUnit1.pas</Transaction>
+    <Transaction>2022/11/14 18:00:10.000.775,=D:\teste-wk-multitier\src\Modulos\API\WebModuleUnit1.pas</Transaction>
+    <Transaction>2022/11/14 18:00:14.000.639,=D:\teste-wk-multitier\src\Modulos\API\js\connection.js</Transaction>
+    <Transaction>2022/11/14 18:00:14.000.666,=D:\teste-wk-multitier\src\Modulos\API\js\serverfunctioninvoker.js</Transaction>
+    <Transaction>2022/11/14 18:00:14.000.871,=D:\teste-wk-multitier\src\Modulos\API\images\collapse.png</Transaction>
+    <Transaction>2022/11/14 18:00:14.000.775,=D:\teste-wk-multitier\src\Modulos\API\templates\serverfunctioninvoker.html</Transaction>
+    <Transaction>2022/11/14 18:00:14.000.690,=D:\teste-wk-multitier\src\Modulos\API\css\main.css</Transaction>
+    <Transaction>2022/11/14 18:00:14.000.527,=D:\teste-wk-multitier\src\Modulos\API\js\serverfunctions.js</Transaction>
+    <Transaction>2022/11/14 18:00:14.000.713,=D:\teste-wk-multitier\src\Modulos\API\css\serverfunctioninvoker.css</Transaction>
+    <Transaction>2022/11/14 18:00:14.000.507,=D:\teste-wk-multitier\src\Modulos\API\js\callbackframework.js</Transaction>
+    <Transaction>2022/11/14 18:00:14.000.594,=D:\teste-wk-multitier\src\Modulos\API\js\serverfunctionexecutor-min.js</Transaction>
+    <Transaction>2022/11/14 18:00:14.000.618,=D:\teste-wk-multitier\src\Modulos\API\js\callbackframework-min.js</Transaction>
+    <Transaction>2022/11/14 18:00:14.000.432,=D:\teste-wk-multitier\src\Modulos\API\js\base64.js</Transaction>
+    <Transaction>2022/11/14 18:00:14.000.457,=D:\teste-wk-multitier\src\Modulos\API\js\serverfunctionexecutor.js</Transaction>
+    <Transaction>2022/11/14 18:00:14.000.568,=D:\teste-wk-multitier\src\Modulos\API\js\json2-min.js</Transaction>
+    <Transaction>2022/11/14 18:00:14.000.745,=D:\teste-wk-multitier\src\Modulos\API\templates\reversestring.html</Transaction>
+    <Transaction>2022/11/14 18:00:14.000.894,=D:\teste-wk-multitier\src\Modulos\API\images\expand.png</Transaction>
+    <Transaction>2022/11/14 18:00:14.000.545,=D:\teste-wk-multitier\src\Modulos\API\js\base64-min.js</Transaction>
+    <Transaction>2022/11/14 18:00:14.000.488,=D:\teste-wk-multitier\src\Modulos\API\js\json2.js</Transaction>
+    <Transaction>2022/11/14 18:00:50.000.306,D:\teste-wk-multitier\src\Modulos\API\FormUnit1.pas=D:\teste-wk-multitier\src\Modulos\API\Principal.pas</Transaction>
+    <Transaction>2022/11/14 18:00:50.000.306,D:\teste-wk-multitier\src\Modulos\API\FormUnit1.dfm=D:\teste-wk-multitier\src\Modulos\API\Principal.dfm</Transaction>
+    <Transaction>2022/11/14 18:02:02.000.684,D:\teste-wk-multitier\src\Modulos\API\WebModuleUnit1.pas=D:\teste-wk-multitier\src\Modulos\API\UDM.pas</Transaction>
+    <Transaction>2022/11/14 18:02:02.000.684,D:\teste-wk-multitier\src\Modulos\API\WebModuleUnit1.dfm=D:\teste-wk-multitier\src\Modulos\API\UDM.dfm</Transaction>
+    <Transaction>2022/11/14 18:02:25.000.268,D:\teste-wk-multitier\src\Modulos\API\ServerMethodsUnit1.dfm=D:\teste-wk-multitier\src\Modulos\API\ServerMethods.dfm</Transaction>
+    <Transaction>2022/11/14 18:02:25.000.268,D:\teste-wk-multitier\src\Modulos\API\ServerMethodsUnit1.pas=D:\teste-wk-multitier\src\Modulos\API\ServerMethods.pas</Transaction>
+    <Transaction>2022/11/15 17:35:47.601,=D:\teste-wk-multitier\src\Entidades\Pessoa.pas</Transaction>
+    <Transaction>2022/11/15 17:35:55.594,=D:\teste-wk-multitier\src\DAO\DAOPessoa.pas</Transaction>
+    <Transaction>2022/11/15 17:46:00.206,=D:\teste-wk-multitier\src\Modulos\API\Unit1.pas</Transaction>
+    <Transaction>2022/11/15 17:46:17.453,D:\teste-wk-multitier\src\Func.pas=D:\teste-wk-multitier\src\Modulos\API\Unit1.pas</Transaction>
+    <Transaction>2022/11/15 18:26:30.839,=D:\teste-wk-multitier\src\CTR\CTRPessoa.pas</Transaction>
+    <Transaction>2022/11/16 09:13:39.153,=D:\teste-wk-multitier\src\Modulos\API\Unit1.pas</Transaction>
+    <Transaction>2022/11/16 09:14:19.756,D:\teste-wk-multitier\src\DAO\SuperDAO.pas=D:\teste-wk-multitier\src\Modulos\API\Unit1.pas</Transaction>
+    <Transaction>2022/11/16 10:26:26.497,=D:\teste-wk-multitier\src\Entidades\Endereco.pas</Transaction>
+    <Transaction>2022/11/16 10:34:36.074,=D:\teste-wk-multitier\src\Entidades\Endereco_integracao.pas</Transaction>
+    <Transaction>2022/11/16 10:45:50.754,=D:\teste-wk-multitier\src\DAO\DAOEndereco_integracao.pas</Transaction>
+    <Transaction>2022/11/16 10:49:51.640,=D:\teste-wk-multitier\src\CTR\CTREndereco.pas</Transaction>
+    <Transaction>2022/11/16 10:50:08.393,=D:\teste-wk-multitier\src\DAO\DAOEndereco.pas</Transaction>
+    <Transaction>2022/11/16 10:55:07.689,=D:\teste-wk-multitier\src\CTR\CTREndereco_integracao.pas</Transaction>
+    <Transaction>2022/11/16 19:24:20.430,=D:\teste-wk-multitier\src\Modulos\API\Unit1.pas</Transaction>
+    <Transaction>2022/11/16 19:24:39.305,D:\teste-wk-multitier\src\Entidades\PessoaEndereco.pas=D:\teste-wk-multitier\src\Modulos\API\Unit1.pas</Transaction>
+    <Transaction>2022/11/16 19:36:28.289,=D:\teste-wk-multitier\src\Modulos\API\Unit1.pas</Transaction>
+    <Transaction>2022/11/16 19:37:14.820,D:\teste-wk-multitier\src\CTR\CTRPessoaEndereco.pas=D:\teste-wk-multitier\src\Modulos\API\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

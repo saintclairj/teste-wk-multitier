@@ -1,0 +1,16 @@
+unit CTRPessoaEndereco;
+
+interface
+
+uses PessoaEndereco;
+
+type
+  TCTRPessoaEndereco = class
+
+  public
+
+  end;
+
+implementation
+
+end.

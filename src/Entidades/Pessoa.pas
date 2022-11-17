@@ -1,0 +1,31 @@
+Unit Pessoa;
+
+interface
+
+  uses db, Dialogs, SysUtils, StdCtrls, Contnrs, Controls;
+
+  Type
+
+  TPessoa = Class
+  Private
+    Fidpessoa : String;
+    Fflnatureza : String;
+    Fdsdocumento : String;
+    Fnmprimeiro : String;
+    Fdtregistro : String;
+    fnmsegundo : String;
+
+  Published
+    property idpessoa : String read Fidpessoa write Fidpessoa;
+    property flnatureza : String read Fflnatureza write Fflnatureza;
+    property dsdocumento : String read Fdsdocumento write Fdsdocumento;
+    property nmprimeiro : String read Fnmprimeiro write Fnmprimeiro;
+    property dtregistro : String read Fdtregistro write Fdtregistro;
+    property nmsegundo : String read Fnmsegundo write Fnmsegundo;
+
+  end;
+
+
+implementation
+
+end.

@@ -1,0 +1,82 @@
+Unit DAOEndereco_Integracao;
+
+interface
+
+  uses FireDAC.Stan.Intf, FireDAC.Stan.Option,FireDAC.Stan.Param, FireDAC.Stan.Error,FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,FireDAC.Comp.DataSet, FireDAC.Comp.Client, Endereco_Integracao, Func, SuperDAO;
+
+  Type
+
+  TDAOEndereco_Integracao = Class(TSuperDAO)
+  public
+    function inserir(Endereco_Integracao : TEndereco_Integracao) : Boolean;
+    function atualizar(Endereco_Integracao : TEndereco_Integracao) : Boolean;
+    function excluir(id: String) : Boolean;
+    function preencherEntidade(Endereco_Integracao : TEndereco_Integracao) : Boolean;
+    procedure preencherDTO(Query: TDataSet; Endereco_Integracao : TEndereco_Integracao);
+  end;
+
+
+implementation
+
+function TDAOEndereco_Integracao.inserir(Endereco_Integracao : TEndereco_Integracao) : Boolean;
+var
+  r: String;
+begin
+  r:= executarSQL('INSERT INTO endereco_integracao('+
+      'dsuf,nmcidade,nmbairro,nmlogradouro,dscomplemento)'+
+      'VALUES ('+
+      TFunc.QuotedStr2(dtoendereco_integracao.dsuf)+','+TFunc.QuotedStr2(dtoendereco_integracao.nmcidade)+','+
+      TFunc.QuotedStr2(dtoendereco_integracao.nmbairro)+','+TFunc.QuotedStr2(dtoendereco_integracao.nmlogradouro)+','+
+      TFunc.QuotedStr2(dtoendereco_integracao.dscomplemento)+')');
+
+  Result := (r = '');
+end;
+
+
+function TDAOEndereco_Integracao.atualizar(Endereco_Integracao : TEndereco_Integracao) : Boolean;
+var
+  r: String;
+begin
+  r:= executarSQL('UPDATE Endereco_Integracao SET '+
+      'dsdocumento = ' + TFunc.QuotedStr2(Endereco_Integracao.dsdocumento)+','+
+      'nmprimeiro = ' + TFunc.QuotedStr2(Endereco_Integracao.nmprimeiro)+','+
+      'dtregistro = ' + TFunc.QuotedStr2(Endereco_Integracao.dtregistro)+
+      ' WHERE idEndereco_Integracao = ' + Endereco_Integracao.idEndereco_Integracao);
+
+  Result := (r = '');
+end;
+
+
+function TDAOEndereco_Integracao.excluir(id: String) : Boolean;
+var
+  r: String;
+begin
+  r:= executarSQL('DELETE FROM Endereco_Integracao WHERE idEndereco_Integracao = '+id);
+  Result := (r = '');
+end;
+
+
+function TDAOEndereco_Integracao.preencherEntidade(Endereco_Integracao : TEndereco_Integracao) : Boolean;
+var
+  Query: TDataSet;
+begin
+  Query:= executarConsulta('SELECT * FROM Endereco_Integracao WHERE idEndereco_Integracao = '+Endereco_Integracao.idEndereco_Integracao);
+  preencherDTO(Query, Endereco_Integracao);
+end;
+
+
+procedure TDAOEndereco_Integracao.preencherDTO(Query:TDataSet; Endereco_Integracao : TEndereco_Integracao);
+begin
+
+  with Query do
+    begin
+      Endereco_Integracao.idEndereco_Integracao := FieldByName('idEndereco_Integracao').AsString;
+      Endereco_Integracao.flnatureza := FieldByName('flnatureza').AsString;
+      Endereco_Integracao.dsdocumento := FieldByName('dsdocumento').AsString;
+      Endereco_Integracao.nmprimeiro := FieldByName('nmprimeiro').AsString;
+      Endereco_Integracao.dtregistro := FieldByName('dtregistro').AsString;
+
+    end;
+
+end;
+end.

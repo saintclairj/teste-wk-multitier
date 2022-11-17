@@ -1,0 +1,51 @@
+Unit PessoaEndereco;
+
+interface
+
+  uses db, Dialogs, SysUtils, StdCtrls, Contnrs, Controls;
+
+  Type
+
+  TPessoa = Class
+  Private
+    Fidpessoa : String;
+    Fflnatureza : String;
+    Fdsdocumento : String;
+    Fnmprimeiro : String;
+    Fdtregistro : String;
+    fnmsegundo : String;
+
+    Fidendereco : String;
+    Fdscep : String;
+
+    Fdsuf : String;
+    Fnmcidade : String;
+    Fnmbairro : String;
+    Fnmlogradouro : String;
+    Fdscomplemento : String;
+
+  Published
+    property idpessoa : String read Fidpessoa write Fidpessoa;
+    property flnatureza : String read Fflnatureza write Fflnatureza;
+    property dsdocumento : String read Fdsdocumento write Fdsdocumento;
+    property nmprimeiro : String read Fnmprimeiro write Fnmprimeiro;
+    property dtregistro : String read Fdtregistro write Fdtregistro;
+    property nmsegundo : String read Fnmsegundo write Fnmsegundo;
+
+    property idendereco : String read Fidendereco write Fidendereco;
+    property dscep : String read Fdscep write Fdscep;
+
+    property dsuf : String read Fdsuf write Fdsuf;
+    property nmcidade : String read Fnmcidade write Fnmcidade;
+    property nmbairro : String read Fnmbairro write Fnmbairro;
+    property nmlogradouro : String read Fnmlogradouro write Fnmlogradouro;
+    property dscomplemento : String read Fdscomplemento write Fdscomplemento;
+
+
+
+  end;
+
+
+implementation
+
+end.

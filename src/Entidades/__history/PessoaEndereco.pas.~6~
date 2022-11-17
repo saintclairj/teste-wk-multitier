@@ -1,0 +1,28 @@
+Unit PessoaEndereco;
+
+interface
+
+  uses db, Dialogs, SysUtils, StdCtrls, Contnrs, Controls,
+  Pessoa, Endereco, Endereco_Integracao;
+
+  Type
+
+  TPessoaEndereco = Class
+  Private
+    Fpessoa : TPessoa;
+    Fendereco : TEndereco;
+    Fendereco_integracao : TEndereco_Integracao;
+
+
+  Published
+    property pessoa : TPessoa read Fpessoa write Fpessoa;
+    property endereco : TEndereco read Fendereco write Fendereco;
+    property endereco_integracao : TEndereco_Integracao read Fendereco_integracao write Fendereco_integracao;
+    
+
+  end;
+
+
+implementation
+
+end.

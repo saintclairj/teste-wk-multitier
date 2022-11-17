@@ -1,0 +1,74 @@
+Unit BLLendereco;
+
+interface
+
+  uses FireDAC.Stan.Intf, FireDAC.Stan.Option,FireDAC.Stan.Param, FireDAC.Stan.Error,FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,FireDAC.Comp.DataSet, FireDAC.Comp.Client, DTOendereco, Func;
+
+  Type
+
+  TBLLendereco = Class
+  private
+    constructor Create; overload;
+  public
+    objDalendereco : TDALendereco;
+    destructor Destroy; override;
+
+    function inserir(dtoendereco : TDTOendereco) : Boolean;
+    function atualizar(dtoendereco : TDTOendereco) : Boolean;
+    function salvar(dtoendereco : TDTOendereco) : Boolean;
+    function excluir(dtoendereco : TDTOendereco) : Boolean;
+    function preencherEntidade(dtoendereco : TDTOendereco) : Boolean;
+    procedure preencherDTO(Query: TADOQuery; dtoendereco : TDTOendereco);
+  end;
+
+
+implementation
+
+constructor TBLLendereco.Create;
+begin
+  objDALendereco := TDALendereco.Create;
+end;
+
+destructor TBLLendereco.Destroy;
+begin
+  FreeAndNil(objDALendereco);
+  inherited;
+end;
+
+function TBLLendereco.inserir(dtoendereco : TDTOendereco) : Boolean;
+begin
+  Result := objDALendereco.inserir(dtoendereco);
+end;
+
+function TBLLendereco.atualizar(dtoendereco : TDTOendereco) : Boolean;
+begin
+  Result := objDALendereco.atualizar(dtoendereco);
+end;
+
+function TBLLendereco.salvar(dtoendereco : TDTOendereco) : Boolean;
+begin
+  if dtoendereco.idpessoa = '' then
+    begin
+      Result := objDALendereco.inserir(dtoendereco);
+    end
+  else
+    begin
+      Result := objDALendereco.atualizar(dtoendereco);
+    end;
+end;
+
+function TBLLendereco.excluir(dtoendereco : TDTOendereco) : Boolean;
+begin
+  Result := objDALendereco.excluir(dtoendereco);
+end;
+
+function TBLLendereco.preencherEntidade(dtoendereco : TDTOendereco) : Boolean;
+begin
+  Result := objDALendereco.preencherEntidade(dtoendereco);
+end;
+
+procedure TBLLendereco.preencherDTO(Query:TADOQuery; dtoendereco : TDTOendereco);
+begin
+  objDALendereco.preencherDTO(Query, dtoendereco);
+end;
+end.

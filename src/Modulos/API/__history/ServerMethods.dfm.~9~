@@ -1,0 +1,35 @@
+object SM: TSM
+  OldCreateOrder = False
+  Height = 313
+  Width = 525
+  object FDGUIxWaitCursor1: TFDGUIxWaitCursor
+    Provider = 'Forms'
+    Left = 352
+    Top = 40
+  end
+  object FDPhysPgDriverLink1: TFDPhysPgDriverLink
+    VendorHome = '.\'
+    Left = 272
+    Top = 112
+  end
+  object Conexao: TFDConnection
+    Params.Strings = (
+      'Database=teste'
+      'User_Name=postgres'
+      'Password=584584'
+      'DriverID=PG')
+    LoginPrompt = False
+    Left = 352
+    Top = 96
+  end
+  object QAux: TFDQuery
+    Connection = Conexao
+    Left = 352
+    Top = 168
+  end
+  object QConsulta: TFDQuery
+    Connection = Conexao
+    Left = 352
+    Top = 216
+  end
+end

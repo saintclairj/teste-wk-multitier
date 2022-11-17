@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2022/11/16 15:51:29.188,=D:\Projetos Delphi\Unit1.pas</Transaction>
+    <Transaction>2022/11/16 15:51:49.253,D:\teste-wk-multitier\src\Modulos\Desktop\Principal.pas=D:\Projetos Delphi\Unit1.pas</Transaction>
+    <Transaction>2022/11/16 15:51:49.253,D:\teste-wk-multitier\src\Modulos\Desktop\Principal.dfm=D:\Projetos Delphi\Unit1.dfm</Transaction>
+    <Transaction>2022/11/16 15:52:17.615,D:\teste-wk-multitier\src\Modulos\Desktop\Cadastro.dproj=D:\Projetos Delphi\Project1.dproj</Transaction>
+    <Transaction>2022/11/16 16:36:17.023,=D:\teste-wk-multitier\src\Modulos\Desktop\Unit1.pas</Transaction>
+    <Transaction>2022/11/16 16:36:35.414,D:\teste-wk-multitier\src\Modulos\Desktop\UDM.dfm=D:\teste-wk-multitier\src\Modulos\Desktop\Unit1.dfm</Transaction>
+    <Transaction>2022/11/16 16:36:35.414,D:\teste-wk-multitier\src\Modulos\Desktop\UDM.pas=D:\teste-wk-multitier\src\Modulos\Desktop\Unit1.pas</Transaction>
+    <Transaction>2022/11/16 16:43:18.414,=D:\teste-wk-multitier\src\Func.pas</Transaction>
+    <Transaction>2022/11/16 17:14:58.008,=D:\teste-wk-multitier\src\Modulos\Desktop\Unit1.pas</Transaction>
+    <Transaction>2022/11/16 17:15:11.664,D:\teste-wk-multitier\src\Modulos\Desktop\CTR\CTRPessoa.pas=D:\teste-wk-multitier\src\Modulos\Desktop\Unit1.pas</Transaction>
+    <Transaction>2022/11/16 17:23:40.883,=D:\teste-wk-multitier\src\Entidades\Pessoa.pas</Transaction>
+    <Transaction>2022/11/16 20:32:45.836,=D:\teste-wk-multitier\src\Modulos\Desktop\Unit1.pas</Transaction>
+    <Transaction>2022/11/16 20:34:33.680,=D:\teste-wk-multitier\src\Entidades\Endereco.pas</Transaction>
+    <Transaction>2022/11/16 20:34:33.711,=D:\teste-wk-multitier\src\Entidades\Endereco_integracao.pas</Transaction>
+    <Transaction>2022/11/16 20:34:33.726,=D:\teste-wk-multitier\src\Entidades\PessoaEndereco.pas</Transaction>
+    <Transaction>2022/11/16 20:55:10.742,=D:\teste-wk-multitier\src\Modulos\Desktop\Unit1.pas</Transaction>
+    <Transaction>2022/11/16 20:55:23.789,D:\teste-wk-multitier\src\Modulos\Desktop\CTR\CTRPessoaEndereco.pas=D:\teste-wk-multitier\src\Modulos\Desktop\Unit1.pas</Transaction>
+    <Transaction>2022/11/16 21:09:51.180,=D:\teste-wk-multitier\src\Modulos\Desktop\Unit1.pas</Transaction>
+    <Transaction>2022/11/16 21:10:05.727,D:\teste-wk-multitier\src\Modulos\Desktop\CTR\CTREndereco.pas=D:\teste-wk-multitier\src\Modulos\Desktop\Unit1.pas</Transaction>
+    <Transaction>2022/11/16 21:12:12.383,=D:\teste-wk-multitier\src\Modulos\Desktop\Unit1.pas</Transaction>
+    <Transaction>2022/11/16 21:12:49.461,D:\teste-wk-multitier\src\Modulos\Desktop\CTR\CTREndereco_Integracao.pas=D:\teste-wk-multitier\src\Modulos\Desktop\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,0 +1,18 @@
+program Cadastro;
+
+uses
+  Vcl.Forms,
+  Principal in 'Principal.pas' {frmPrincipal},
+  UDM in 'UDM.pas' {DM: TDataModule},
+  Func in '..\..\Func.pas',
+  CTRPessoa in 'CTR\CTRPessoa.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TDM, DM);
+  Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.Run;
+end.

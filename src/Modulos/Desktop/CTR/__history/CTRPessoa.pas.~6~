@@ -1,0 +1,46 @@
+unit CTRPessoa;
+
+interface
+uses UDM, Func, Data.DB, Pessoa, Rest.JSON;
+  type
+  TCTRPessoa = class
+    procedure listar(ds: TDataSet);
+    procedure preencherEntidade(Query: TDataSet; Pessoa : TPessoa);
+    procedure inserir(Pessoa: TPessoa);
+
+  end;
+
+implementation
+
+{ TCTRPessoa }
+
+procedure TCTRPessoa.inserir(Pessoa: TPessoa);
+var
+  s: String;
+begin
+  s := TJSON.ObjectToJsonString(Pessoa);
+  DM.chamarMetodoPost('Pessoa',s);
+
+end;
+
+procedure TCTRPessoa.listar(ds: TDataSet);
+begin
+  TFunc.JsonToDataSet(ds, DM.chamarMetodoGET('Pessoa/listar'));
+end;
+
+
+
+procedure TCTRPessoa.preencherEntidade(Query: TDataSet; Pessoa: TPessoa);
+begin
+  with Query do
+  begin
+    pessoa.idpessoa := FieldByName('idpessoa').AsString;
+    pessoa.flnatureza := FieldByName('flnatureza').AsString;
+    pessoa.dsdocumento := FieldByName('dsdocumento').AsString;
+    pessoa.nmprimeiro := FieldByName('nmprimeiro').AsString;
+    pessoa.dtregistro := FieldByName('dtregistro').AsString;
+    pessoa.nmsegundo := FieldByName('nmsegundo').AsString;
+  end;
+end;
+
+end.

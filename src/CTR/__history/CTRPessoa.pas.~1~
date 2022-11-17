@@ -1,0 +1,74 @@
+Unit BLLpessoa;
+
+interface
+
+  uses FireDAC.Stan.Intf, FireDAC.Stan.Option,FireDAC.Stan.Param, FireDAC.Stan.Error,FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,FireDAC.Comp.DataSet, FireDAC.Comp.Client, DTOpessoa, Func;
+
+  Type
+
+  TBLLpessoa = Class
+  private
+    constructor Create; overload;
+  public
+    objDalpessoa : TDALpessoa;
+    destructor Destroy; override;
+
+    function inserir(dtopessoa : TDTOpessoa) : Boolean;
+    function atualizar(dtopessoa : TDTOpessoa) : Boolean;
+    function salvar(dtopessoa : TDTOpessoa) : Boolean;
+    function excluir(dtopessoa : TDTOpessoa) : Boolean;
+    function preencherEntidade(dtopessoa : TDTOpessoa) : Boolean;
+    procedure preencherDTO(Query: TADOQuery; dtopessoa : TDTOpessoa);
+  end;
+
+
+implementation
+
+constructor TBLLpessoa.Create;
+begin
+  objDALpessoa := TDALpessoa.Create;
+end;
+
+destructor TBLLpessoa.Destroy;
+begin
+  FreeAndNil(objDALpessoa);
+  inherited;
+end;
+
+function TBLLpessoa.inserir(dtopessoa : TDTOpessoa) : Boolean;
+begin
+  Result := objDALpessoa.inserir(dtopessoa);
+end;
+
+function TBLLpessoa.atualizar(dtopessoa : TDTOpessoa) : Boolean;
+begin
+  Result := objDALpessoa.atualizar(dtopessoa);
+end;
+
+function TBLLpessoa.salvar(dtopessoa : TDTOpessoa) : Boolean;
+begin
+  if dtopessoa.idpessoa = '' then
+    begin
+      Result := objDALpessoa.inserir(dtopessoa);
+    end
+  else
+    begin
+      Result := objDALpessoa.atualizar(dtopessoa);
+    end;
+end;
+
+function TBLLpessoa.excluir(dtopessoa : TDTOpessoa) : Boolean;
+begin
+  Result := objDALpessoa.excluir(dtopessoa);
+end;
+
+function TBLLpessoa.preencherEntidade(dtopessoa : TDTOpessoa) : Boolean;
+begin
+  Result := objDALpessoa.preencherEntidade(dtopessoa);
+end;
+
+procedure TBLLpessoa.preencherDTO(Query:TADOQuery; dtopessoa : TDTOpessoa);
+begin
+  objDALpessoa.preencherDTO(Query, dtopessoa);
+end;
+end.

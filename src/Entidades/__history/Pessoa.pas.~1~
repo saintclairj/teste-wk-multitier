@@ -1,0 +1,29 @@
+Unit DTOpessoa;
+
+interface
+
+  uses db, Dialogs, SysUtils, StdCtrls, Contnrs, Controls;
+
+  Type
+
+  TDTOpessoa = Class
+  Private
+    Fidpessoa : String;
+    Fflnatureza : String;
+    Fdsdocumento : String;
+    Fnmprimeiro : String;
+    Fdtregistro : String;
+
+  Published
+    property idpessoa : String read Fidpessoa write Fidpessoa;
+    property flnatureza : String read Fflnatureza write Fflnatureza;
+    property dsdocumento : String read Fdsdocumento write Fdsdocumento;
+    property nmprimeiro : String read Fnmprimeiro write Fnmprimeiro;
+    property dtregistro : String read Fdtregistro write Fdtregistro;
+
+  end;
+
+
+implementation
+
+end.

@@ -1,0 +1,34 @@
+unit CTRCep;
+
+interface
+uses CEP;
+type
+  TCTRCep = class
+    public
+      function pegarEndereco(cep: String): TCEP;
+
+
+  end;
+
+implementation
+uses Principal;
+
+
+
+{ TCTRCep }
+
+function TCTRCep.pegarEndereco(cep: String): TCEP;
+begin
+  Result := TCEP.Create;
+  if cep <> '' then
+    begin
+      frmPrincipal.RESTClient1.BaseURL:= 'https://viacep.com.br/ws/'+cep+'/json/';
+      frmPrincipal.RESTRequest1.Execute;
+
+
+    end;
+
+
+end;
+
+end.

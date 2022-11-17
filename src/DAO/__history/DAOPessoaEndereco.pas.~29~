@@ -1,0 +1,146 @@
+unit DAOPessoaEndereco;
+
+interface
+uses Func, SuperDAO, Forms, System.SysUtils, System.JSON,
+System.Classes, PessoaEndereco, Data.DB,CTREndereco, CTREndereco_Integracao,
+CTRPessoa;
+
+type
+  TDAOPessoaEndereco = class(TSuperDAO)
+
+    public
+      CTREndereco: TCTREndereco;
+      CTREndereco_Integracao : TCTREndereco_Integracao;
+      CTRPessoa: TCTRPessoa;
+
+      constructor Create;
+      function inserirCSV(arr: TJSONArray): TRetornoApi;
+      procedure LoadCSV(Filename: string);
+
+      function inserir(PessoaEndereco : TPessoaEndereco) : TRetornoApi;
+      function atualizar(PessoaEndereco : TPessoaEndereco) : TRetornoApi;
+
+
+  end;
+
+implementation
+
+{ TDAOPessoaEndereco }
+
+
+
+function TDAOPessoaEndereco.atualizar(
+  PessoaEndereco: TPessoaEndereco): TRetornoApi;
+begin
+  CTRPessoa.atualizar(PessoaEndereco.pessoa);
+  CTREndereco.atualizar(PessoaEndereco.endereco);
+  CTREndereco_Integracao.atualizar(PessoaEndereco.endereco_integracao);
+  Result.status:= 'ok';
+  Result.msg:= 'Inserido com Sucesso!';
+
+end;
+
+constructor TDAOPessoaEndereco.Create;
+begin
+  CTRPessoa:= TCTRPessoa.Create;
+  CTREndereco:= TCTREndereco.Create;
+  CTREndereco_Integracao := TCTREndereco_Integracao.Create;
+end;
+
+function TDAOPessoaEndereco.inserir(
+  PessoaEndereco: TPessoaEndereco): TRetornoApi;
+var
+  ok: Boolean;
+begin
+  ok:= true;
+
+  CTRPessoa.inserir(PessoaEndereco.pessoa);
+  PessoaEndereco.endereco.idpessoa := PessoaEndereco.pessoa.idpessoa;
+  CTREndereco.inserir(PessoaEndereco.endereco);
+  PessoaEndereco.endereco_integracao.idendereco := PessoaEndereco.endereco.idendereco;
+  CTREndereco_Integracao.inserir(PessoaEndereco.endereco_integracao);
+  Result.status:= 'ok';
+  Result.msg:= 'Inserido com Sucesso!';
+end;
+
+function TDAOPessoaEndereco.inserirCSV(arr: TJSONArray): TRetornoApi;
+var
+  pasta, arquivo: String;
+begin
+  Result.status:= 'ok';
+  Result.msg:= 'importado com sucesso!';
+
+  Pasta:= ExtractFilePath(Application.ExeName);
+  arquivo:= TFunc.JSONParaArquivo(arr,Pasta);
+  if arquivo <> '' then
+    begin
+      LoadCSV(arquivo);
+    end
+  else
+    begin
+      Result.status:= 'erro';
+      Result.msg:= 'Não foi possível importar';
+    end;
+end;
+
+procedure TDAOPessoaEndereco.LoadCSV(Filename: string);
+var
+   i, j, Position, count, edt1: integer;
+   temp, tempField : string;
+   FieldDel: char;
+   Data: TStringList;
+   PessoaEndereco: TPessoaEndereco;
+begin
+  Data := TStringList.Create;
+  FieldDel := ',';
+  Data.LoadFromFile(Filename);
+  temp :=  Data[1];
+  count := 0;
+  for i:= 1 to length(temp) do
+    if copy(temp,i,1) =  FieldDel then
+      inc(count);
+  edt1 := count+1;
+
+  for i := 0 to Data.Count - 1 do
+    begin;
+      PessoaEndereco:= TPessoaEndereco.Create;
+      temp :=  Data[i];
+      if copy(temp,length(temp),1) <> FieldDel then
+        temp := temp + FieldDel;
+      while Pos('"', temp) > 0 do
+        begin
+          Delete(temp,Pos('"', temp),1);
+        end;
+      for j := 1 to edt1 do
+      begin
+        Position := Pos(FieldDel,temp);
+        tempField := copy(temp,0,Position-1);
+
+
+
+        case j of
+          1: PessoaEndereco.Pessoa.flnatureza := tempField;
+          2: PessoaEndereco.Pessoa.nmprimeiro := tempField;
+          3: PessoaEndereco.Pessoa.nmsegundo := tempField;
+          4: PessoaEndereco.Pessoa.dsdocumento := tempField;
+          5: PessoaEndereco.Endereco.dscep := tempField;
+          6: PessoaEndereco.Endereco_Integracao.dsuf := tempField;
+          7: PessoaEndereco.Endereco_Integracao.nmcidade := tempField;
+          8: PessoaEndereco.Endereco_Integracao.nmbairro := tempField;
+          9: PessoaEndereco.Endereco_Integracao.nmlogradouro := tempField;
+          10: PessoaEndereco.Endereco_Integracao.dscomplemento := tempField;
+        end;
+
+        PessoaEndereco.Pessoa.dtregistro:= 'NOW()';
+
+        Delete(temp,1,length(tempField)+1);
+      end;
+      if i > 0 then
+        begin
+          inserir(PessoaEndereco);
+        end;
+    end;
+    Data.Free;
+end;
+
+end.

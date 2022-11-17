@@ -36,7 +36,7 @@ begin
   CTREndereco.atualizar(PessoaEndereco.endereco);
   CTREndereco_Integracao.atualizar(PessoaEndereco.endereco_integracao);
   Result.status:= 'ok';
-  Result.msg:= 'Inserido com Sucesso!';
+  Result.msg:= 'Alterado com Sucesso!';
 
 end;
 

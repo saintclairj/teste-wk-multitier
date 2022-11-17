@@ -76,19 +76,32 @@ object frmPrincipal: TfrmPrincipal
     Left = 344
     Top = 64
   end
-  object QAux: TFDQuery
-    Connection = Conexao
-    Left = 344
-    Top = 136
-  end
-  object QConsulta: TFDQuery
-    Connection = Conexao
-    Left = 344
-    Top = 175
-  end
   object FDGUIxWaitCursor1: TFDGUIxWaitCursor
     Provider = 'Forms'
     Left = 344
     Top = 8
+  end
+  object RCCep: TRESTClient
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'UTF-8, *;q=0.8'
+    BaseURL = 'https://viacep.com.br/ws/01001000/json/'
+    Params = <>
+    HandleRedirects = True
+    RaiseExceptionOn500 = False
+    Left = 200
+    Top = 160
+  end
+  object RReqCEP: TRESTRequest
+    Client = RCCep
+    Params = <>
+    Response = RResCep
+    SynchronizedEvents = False
+    Left = 272
+    Top = 160
+  end
+  object RResCep: TRESTResponse
+    ContentType = 'application/json'
+    Left = 352
+    Top = 160
   end
 end

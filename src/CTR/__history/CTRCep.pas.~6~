@@ -1,0 +1,24 @@
+unit CTRCep;
+
+interface
+uses CEP;
+type
+  TCTRCep = class
+    public
+      function pegarEndereco(cep: String): TCEP;
+
+
+  end;
+
+implementation
+
+
+
+{ TCTRCep }
+
+function TCTRCep.pegarEndereco(cep: String): TCEP;
+begin
+
+end;
+
+end.

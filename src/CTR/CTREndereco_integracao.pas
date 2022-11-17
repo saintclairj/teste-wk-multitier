@@ -18,10 +18,16 @@ interface
     function excluir(id: String) : Boolean;
     function preencherEntidade(Endereco_Integracao : TEndereco_Integracao) : Boolean;
     procedure preencherDTO(Query: TDataSet; Endereco_Integracao : TEndereco_Integracao);
+    procedure atualizarTodosCeps;
   end;
 
 
 implementation
+
+procedure TCTREndereco_Integracao.atualizarTodosCeps;
+begin
+  objDAOEndereco_Integracao.atualizarTodosCeps;
+end;
 
 constructor TCTREndereco_Integracao.Create;
 begin

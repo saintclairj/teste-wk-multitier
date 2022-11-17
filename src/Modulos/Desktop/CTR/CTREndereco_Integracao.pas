@@ -1,20 +1,28 @@
 unit CTREndereco_Integracao;
 
 interface
-uses Endereco_Integracao, Data.DB;
+uses Endereco_Integracao, Data.DB, Func, UDM;
 
 type
   TCTREndereco_Integracao = class
 
   public
     procedure preencherEntidade(Query: TDataSet; Endereco_Integracao : TEndereco_Integracao);
-
+    function atualizarTodosEnderecos: TRetornoApi;
 
   end;
 
 implementation
 
 { TCTREndereco }
+
+function TCTREndereco_Integracao.atualizarTodosEnderecos: TRetornoApi;
+var
+  s: String;
+begin
+  s:= DM.chamarMetodoGET('EnderecoIntegracao/atualizarTodos');
+  Result:= Tfunc.pegarRetornoApi(s);
+end;
 
 procedure TCTREndereco_Integracao.preencherEntidade(Query: TDataSet; Endereco_Integracao: TEndereco_Integracao);
 begin

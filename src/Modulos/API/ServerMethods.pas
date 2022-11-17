@@ -38,6 +38,7 @@ type
     function acceptEndereco(objJ : TJSONObject):TJSONValue;
     function cancelEndereco(id: String):TJSONValue;
 
+    function EnderecoIntegracao(metodo: String): TJSONValue;
     function updateEnderecoIntegracao(objJ : TJSONObject):TJSONValue;
     function acceptEnderecoIntegracao(objJ : TJSONObject):TJSONValue;
     function cancelEnderecoIntegracao(id: String):TJSONValue;
@@ -193,6 +194,19 @@ end;
 function TSM.EchoString(Value: string): string;
 begin
   Result := Value;
+end;
+
+function TSM.EnderecoIntegracao(metodo: String): TJSONValue;
+var
+  CTREndereco_Integracao: TCTREndereco_Integracao;
+begin
+  CTREndereco_Integracao:= TCTREndereco_Integracao.Create;
+  if metodo = 'atualizarTodos' then
+    begin
+      CTREndereco_Integracao.atualizarTodosCeps;
+      Result := TFunc.MensagemConfirmacao('atualização iniciada');
+    end;
+  CTREndereco_Integracao.Free;
 end;
 
 function TSM.Pessoa(metodo: String): TJSONValue;

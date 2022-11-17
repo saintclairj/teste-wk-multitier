@@ -2,7 +2,8 @@ Unit DAOEndereco_Integracao;
 
 interface
 
-  uses FireDAC.Stan.Intf, FireDAC.Stan.Option,FireDAC.Stan.Param, FireDAC.Stan.Error,FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,FireDAC.Comp.DataSet, FireDAC.Comp.Client, Endereco_Integracao, Func, SuperDAO;
+  uses FireDAC.Stan.Intf, FireDAC.Stan.Option,FireDAC.Stan.Param, FireDAC.Stan.Error,FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,FireDAC.Comp.DataSet, FireDAC.Comp.Client, Endereco_Integracao, Func, SuperDAO,
+System.SysUtils, System.Classes;
 
   Type
 
@@ -13,10 +14,14 @@ interface
     function excluir(id: String) : Boolean;
     function preencherEntidade(Endereco_Integracao : TEndereco_Integracao) : Boolean;
     procedure preencherDTO(Query: TDataSet; Endereco_Integracao : TEndereco_Integracao);
+    function atualizarCEP(cep: String): Boolean;
+    procedure atualizarTodosCeps;
+
   end;
 
 
 implementation
+uses CTRCep, Cep, Principal;
 
 function TDAOEndereco_Integracao.inserir(Endereco_Integracao : TEndereco_Integracao) : Boolean;
 var
@@ -38,7 +43,6 @@ var
   r: String;
 begin
   r:= executarSQL('UPDATE Endereco_Integracao SET '+
-      'idendereco = ' + TFunc.QuotedStr2(Endereco_Integracao.idendereco)+','+
       'nmcidade = ' + TFunc.QuotedStr2(Endereco_Integracao.nmcidade)+','+
       'nmbairro = ' + TFunc.QuotedStr2(Endereco_Integracao.nmbairro)+','+
       'nmlogradouro = ' + TFunc.QuotedStr2(Endereco_Integracao.nmlogradouro)+','+
@@ -48,6 +52,80 @@ begin
   Result := (r = '');
 end;
 
+
+function TDAOEndereco_Integracao.atualizarCEP(cep: String): Boolean;
+var
+  r: String;
+  CTRCep: TCTRCep;
+  objCep: TCep;
+begin
+  Result := false;
+  CTRCep:= TCTRCep.Create;
+  objCep:= TCep.Create;
+  objCep:= CTRCep.pegarEndereco(cep);
+  if objCep.cep <> '' then
+    begin
+      r:= executarSQL('UPDATE Endereco_Integracao SET '+
+          'nmcidade = ' + QuotedStr(objCep.localidade)+','+
+          'nmbairro = ' + QuotedStr(objCep.bairro)+','+
+          'nmlogradouro = ' + QuotedStr(objCep.logradouro)+
+          ' WHERE idendereco in (SELECT idendereco FROM endereco WHERE dscep = '+ QuotedStr(cep) +')');
+      Result := (r = '');
+    end;
+
+
+  CTRCep.Free;
+  objCep.Free;
+end;
+
+procedure TDAOEndereco_Integracao.atualizarTodosCeps;
+begin
+
+if (frmPrincipal.statusAtualizacaoCEP = '') or
+    (frmPrincipal.statusAtualizacaoCEP = 'concluída') or
+    (frmPrincipal.statusAtualizacaoCEP = 'com falha') then
+  begin
+
+    TThread.CreateAnonymousThread(procedure
+    var
+      Query: TDataSet;
+      ok: Boolean;
+    begin
+
+        ok:= true;
+        try
+          frmPrincipal.statusAtualizacaoCEP := 'em andamento';
+          Query:= executarConsulta('SELECT DISTINCT dscep FROM endereco WHERE dscep IS NOT NULL AND dscep <> ''''');
+          with Query do
+            begin
+              while not Eof do
+                begin
+                  if not atualizarCEP(FieldByName('dscep').AsString) then
+                    begin
+                      ok:= false;
+                    end;
+                  Next;
+                end;
+            end;
+          Query.Free;
+        except
+          ok:= false;
+        end;
+
+        if ok then
+          begin
+            frmPrincipal.statusAtualizacaoCEP := 'concluída';
+          end
+        else
+          begin
+            frmPrincipal.statusAtualizacaoCEP := 'com falha';
+          end;
+
+
+
+    end).start();
+  end;
+end;
 
 function TDAOEndereco_Integracao.excluir(id: String) : Boolean;
 var

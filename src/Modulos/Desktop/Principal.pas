@@ -10,7 +10,8 @@ uses
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids,
   Vcl.ExtCtrls, Vcl.Buttons, CTRPessoa, Pessoa, PessoaEndereco, CTRPessoaEndereco,
   CTREndereco, CTREndereco_Integracao,
-  Vcl.StdCtrls, Vcl.Mask;
+  Vcl.StdCtrls, Vcl.Mask, IPPeerClient, REST.Client, Data.Bind.Components,
+  Data.Bind.ObjectScope;
 
 type
   TfrmPrincipal = class(TForm)
@@ -54,6 +55,11 @@ type
     od: TOpenDialog;
     Label12: TLabel;
     cbTipoPessoa: TComboBox;
+    RCCep: TRESTClient;
+    RReqCEP: TRESTRequest;
+    RResCep: TRESTResponse;
+    Panel4: TPanel;
+    SpeedButton3: TSpeedButton;
     procedure SpeedButton1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
@@ -65,6 +71,7 @@ type
     procedure BtNovoClick(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure btImportarClick(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -270,6 +277,11 @@ end;
 procedure TfrmPrincipal.SpeedButton2Click(Sender: TObject);
 begin
   salvar;
+end;
+
+procedure TfrmPrincipal.SpeedButton3Click(Sender: TObject);
+begin
+  TFunc.interpretarRetorno(CTREndereco_Integracao.atualizarTodosEnderecos);
 end;
 
 end.

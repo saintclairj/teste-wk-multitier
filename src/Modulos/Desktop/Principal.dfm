@@ -22,7 +22,7 @@ object frmPrincipal: TfrmPrincipal
     Top = 0
     Width = 703
     Height = 477
-    ActivePage = TabCadastro
+    ActivePage = TabLista
     Align = alClient
     Style = tsButtons
     TabOrder = 0
@@ -160,9 +160,11 @@ object frmPrincipal: TfrmPrincipal
           Left = 0
           Top = 0
           Width = 35
-          Height = 405
+          Height = 364
           Align = alLeft
+          BevelOuter = bvNone
           TabOrder = 0
+          ExplicitHeight = 405
           object BtNovo: TSpeedButton
             Left = 4
             Top = 1
@@ -381,7 +383,7 @@ object frmPrincipal: TfrmPrincipal
           Left = 35
           Top = 0
           Width = 660
-          Height = 405
+          Height = 364
           Align = alClient
           DataSource = DSLista
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -432,6 +434,26 @@ object frmPrincipal: TfrmPrincipal
               Width = 80
               Visible = True
             end>
+        end
+        object Panel4: TPanel
+          Left = 0
+          Top = 364
+          Width = 695
+          Height = 41
+          Align = alBottom
+          BevelOuter = bvNone
+          TabOrder = 2
+          ExplicitLeft = 256
+          ExplicitTop = 184
+          ExplicitWidth = 185
+          object SpeedButton3: TSpeedButton
+            Left = 35
+            Top = 6
+            Width = 198
+            Height = 35
+            Caption = 'Atualizar Todos Endere'#231'os'
+            OnClick = SpeedButton3Click
+          end
         end
       end
     end
@@ -746,5 +768,28 @@ object frmPrincipal: TfrmPrincipal
   object od: TOpenDialog
     Left = 56
     Top = 176
+  end
+  object RCCep: TRESTClient
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'UTF-8, *;q=0.8'
+    BaseURL = 'https://viacep.com.br/ws/01001000/json/'
+    Params = <>
+    HandleRedirects = True
+    RaiseExceptionOn500 = False
+    Left = 480
+    Top = 304
+  end
+  object RReqCEP: TRESTRequest
+    Client = RCCep
+    Params = <>
+    Response = RResCep
+    SynchronizedEvents = False
+    Left = 552
+    Top = 304
+  end
+  object RResCep: TRESTResponse
+    ContentType = 'application/json'
+    Left = 632
+    Top = 304
   end
 end

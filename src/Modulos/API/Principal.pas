@@ -11,7 +11,8 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.PG,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.VCLUI.Wait, FireDAC.Comp.UI, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client;
+  FireDAC.Comp.Client, IPPeerClient, REST.Client, Data.Bind.Components,
+  Data.Bind.ObjectScope;
 
 type
   TfrmPrincipal = class(TForm)
@@ -23,9 +24,10 @@ type
     ButtonOpenBrowser: TButton;
     FDPhysPgDriverLink1: TFDPhysPgDriverLink;
     Conexao: TFDConnection;
-    QAux: TFDQuery;
-    QConsulta: TFDQuery;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
+    RCCep: TRESTClient;
+    RReqCEP: TRESTRequest;
+    RResCep: TRESTResponse;
     procedure FormCreate(Sender: TObject);
     procedure ApplicationEvents1Idle(Sender: TObject; var Done: Boolean);
     procedure ButtonStartClick(Sender: TObject);
@@ -37,6 +39,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    statusAtualizacaoCEP: String;
   end;
 
 var

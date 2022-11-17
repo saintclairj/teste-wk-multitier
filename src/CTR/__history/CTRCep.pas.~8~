@@ -1,0 +1,27 @@
+unit CTRCep;
+
+interface
+uses CEP;
+type
+  TCTRCep = class
+    public
+      function pegarEndereco(cep: String): TCEP;
+
+
+  end;
+
+implementation
+uses Principal;
+
+
+
+{ TCTRCep }
+
+function TCTRCep.pegarEndereco(cep: String): TCEP;
+begin
+  Result := TCEP.Create;
+
+
+end;
+
+end.

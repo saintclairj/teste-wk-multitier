@@ -1,0 +1,35 @@
+unit CepThread;
+
+interface
+uses System.Classes;
+
+type
+  TCepThread = class(TThread)
+
+
+    fConta: Integer;
+
+    procedure Execute; override;
+
+    constructor Criar;
+
+  end;
+
+implementation
+
+{ TCepThread }
+
+
+
+constructor TCepThread.Criar;
+begin
+
+end;
+
+procedure TCepThread.Execute;
+begin
+  inherited;
+
+end;
+
+end.

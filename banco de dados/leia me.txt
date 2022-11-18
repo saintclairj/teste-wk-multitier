@@ -1,2 +1,4 @@
 o banco de dados foi criado com o nome teste
+há dois backups, um criado com a ferramenta Dbeaver e outro com o PGAdmin nas pastas
 as informações de conexão estão dentro do FDConnection
+

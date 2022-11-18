@@ -1,0 +1,2 @@
+o banco de dados foi criado com o nome teste
+as informações de conexão estão dentro do FDConnection
